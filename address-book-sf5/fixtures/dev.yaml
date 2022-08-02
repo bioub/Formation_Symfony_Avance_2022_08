@@ -1,0 +1,12 @@
+App\Entity\Company:
+  company{1..3}:
+    name: '<company()>'
+    city: '<city()>'
+
+App\Entity\Contact:
+  contact{1..10}:
+    firstName: '<firstName()>'
+    lastName: '<lastName()>'
+    email: '50%? <email()>'
+    telephone: '50%? <phoneNumber()>'
+    company: '50%? @company*'
