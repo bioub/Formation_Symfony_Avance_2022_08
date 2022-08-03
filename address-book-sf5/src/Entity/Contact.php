@@ -46,6 +46,17 @@ class Contact
     }
 
     /**
+     * @param mixed $id
+     */
+    public function setId($id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+
+
+    /**
      * Set firstName
      *
      * @param string $firstName

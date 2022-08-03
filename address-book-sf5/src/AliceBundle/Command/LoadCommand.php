@@ -42,7 +42,7 @@ class LoadCommand extends Command
         $this->addOption('purge', 'p', InputOption::VALUE_NONE, 'Purge the database');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $filePath = $input->getArgument('file-path');
         $output->writeln('The file path is : ' . $filePath);
