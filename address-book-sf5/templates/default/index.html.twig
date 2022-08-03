@@ -9,3 +9,8 @@
         </p>
     </div>
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }} {# <-- charge la sortie app.css #}
+    {{ encore_entry_link_tags('home') }}
+{% endblock %}
