@@ -9,10 +9,12 @@ use App\Repository\ContactRepository;
 use Doctrine\DBAL\Connection;
 
 use Psr\Log\LoggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Config\Doctrine\Orm\EntityManagerConfig;
+use function Symfony\Component\String\s;
 
 class ContactController extends AbstractController
 {
@@ -82,7 +84,7 @@ class ContactController extends AbstractController
      */
     public function show($id)
     {
-        $repo = $this->getDoctrine()->getRepository('App:Contact');
+        $repo = $this->getDoctrine()->getRepository(Contact::class);
         $contact = $repo->find($id);
 
         return $this->render('contact/show.html.twig', [
@@ -92,10 +94,11 @@ class ContactController extends AbstractController
 
     /**
      * @Route("/contacts/{id}/update")
+     *
      */
     public function update($id, Request $request)
     {
-        $repo = $this->getDoctrine()->getRepository('App:Contact');
+        $repo = $this->getDoctrine()->getRepository(Contact::class);
         $contact = $repo->find($id);
 
         $form = $this->createForm(ContactType::class);
@@ -127,7 +130,7 @@ class ContactController extends AbstractController
      */
     public function delete($id, Request $request)
     {
-        $repo = $this->getDoctrine()->getRepository('App:Contact');
+        $repo = $this->getDoctrine()->getRepository(Contact::class);
         $contact = $repo->find($id);
 
         if ($request->get('confirm') === 'yes') {

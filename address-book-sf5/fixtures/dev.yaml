@@ -10,3 +10,8 @@ App\Entity\Contact:
     email: '50%? <email()>'
     telephone: '50%? <phoneNumber()>'
     company: '50%? @company*'
+
+App\Entity\User:
+  user1:
+    username: romain
+    password: \$2y\$13\$BDIJWiwgtAKa80slW1U1MOGq.MJx3BQzstn1DuOeSkwz/gpXZOTxG
