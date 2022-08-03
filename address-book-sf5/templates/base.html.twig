@@ -10,7 +10,7 @@
 <body>
 {{ include('top-menu.html.twig') }}
 <div class="container mt-4">
-    {{ include('flash-alert.html.twig') }}
+    {{ flashAlert('success') }}
     {% block body %}{% endblock %}
     <hr />
     <p>
