@@ -15,7 +15,7 @@
       {% for c in contacts %}
       <tr>
         <td>
-          {{ c.firstName }} {{ c.lastName }}
+          {{ c.firstName }} {{ c.lastName | upper }}
         </td>
         <td>
           <a href="{{ path('app_contact_show', {'id': c.id}) }}"

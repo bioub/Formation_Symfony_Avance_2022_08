@@ -5,21 +5,43 @@ namespace App\DataFixtures;
 use App\Entity\Contact;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Generator;
 
 class AppFixtures extends Fixture
 {
+    /** @var Generator */
+    protected $faker;
+
+    /**
+     * @param Generator $faker
+     */
+    public function __construct(Generator $faker)
+    {
+        $this->faker = $faker;
+    }
+
+
     public function load(ObjectManager $manager): void
     {
         // $product = new Product();
         // $manager->persist($product);
 
-        $contact1 = new Contact();
-        $contact1->setFirstName('Steve')->setLastName('Jobs')->setEmail('sjobs@apple.com');
-        $manager->persist($contact1);
+        for ($i=1; $i<=10; $i++) {
+            $varName = "contact$i";
+            $$varName = new Contact();
+            $$varName->setFirstName($this->faker->firstName)
+                ->setLastName($this->faker->lastName);
 
-        $contact1 = new Contact();
-        $contact1->setFirstName('Bill')->setLastName('Gates')->setTelephone('+1 244 3556 3645');
-        $manager->persist($contact1);
+            if (mt_rand(0, 1)) {
+                $$varName->setEmail($this->faker->email);
+            }
+
+            if (mt_rand(0, 1)) {
+                $$varName->setTelephone($this->faker->phoneNumber);
+            }
+
+            $manager->persist($$varName);
+        }
 
         $manager->flush();
     }

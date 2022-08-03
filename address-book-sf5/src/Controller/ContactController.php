@@ -20,6 +20,15 @@ class ContactController extends AbstractController
     protected $logger;
 
     /**
+     * @param LoggerInterface $logger
+     */
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+
+    /**
      * @Route("/contacts/")
      */
     public function list(ContactManager $manager)
@@ -48,6 +57,7 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Contact $contact */
             $contact = $form->getData();
 
             $em = $this->getDoctrine()->getManager();

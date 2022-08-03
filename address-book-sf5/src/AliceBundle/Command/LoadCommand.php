@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
 use Nelmio\Alice\Loader\SimpleFileLoader;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -50,6 +51,13 @@ class LoadCommand extends Command
 
         if ($purge) {
             $output->writeln('Purging database');
+            $commandDrop = $this->getApplication()->find('doctrine:schema:drop');
+            $commandCreate = $this->getApplication()->find('doctrine:schema:update');
+            $arguments = ['--force'  => true];
+            $forceInput = new ArrayInput($arguments);
+
+            $commandDrop->run($forceInput, $output);
+            $commandCreate->run($forceInput, $output);
         }
 
         $set = $this->fileLoader->loadFile($filePath);
@@ -60,7 +68,7 @@ class LoadCommand extends Command
 
         $this->manager->flush();
 
-        $output->writeln('Inserted ' . count($set->getObjects()) . ' entities');
+        $output->writeln('<info>Inserted ' . count($set->getObjects()) . ' entities</info>');
 
         return Command::SUCCESS;
     }

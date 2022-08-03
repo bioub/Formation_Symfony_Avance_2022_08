@@ -29,3 +29,15 @@ services:
 
     Nelmio\Alice\Loader\SimpleFileLoader:
         alias: nelmio_alice.file_loader.simple
+
+#    App\AliceBundle\Command\LoadCommand:
+#        class: App\AliceBundle\Command\LoadCommand
+#        arguments:
+#            - @nelmio_alice.file_loader.simple
+#            - @Doctrine\ORM\EntityManagerInterface
+#        tags:
+#            - console.command
+
+#    App\Twig\HelloExtension:
+#        class: App\Twig\HelloExtension
+#        tags: ['twig.extension']

@@ -12,6 +12,10 @@
 <div class="container mt-4">
     {{ include('flash-alert.html.twig') }}
     {% block body %}{% endblock %}
+    <hr />
+    <p>
+        Copyright {{ date() | date('Y')}} - {{ hello('Romain') | limit(3) }} - {{ helloHtml('Romain') }}
+    </p>
 </div>
 {% block javascripts %}{% endblock %}
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
