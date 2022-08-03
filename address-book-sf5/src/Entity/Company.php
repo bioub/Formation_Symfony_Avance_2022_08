@@ -2,37 +2,21 @@
 
 namespace App\Entity;
 
+use App\Repository\CompanyRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Company
- *
- * @ORM\Table(name="company")
- * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
- */
+#[ORM\Entity(repositoryClass: CompanyRepository::class)]
 class Company
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type:"integer")]
     protected $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=80)
-     */
+    #[ORM\Column(length:80)]
     protected $name;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="city", type="string", length=50, nullable=true)
-     */
+    #[ORM\Column(length:50, nullable: true)]
     protected $city;
 
     /**

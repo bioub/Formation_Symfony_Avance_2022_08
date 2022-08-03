@@ -2,61 +2,37 @@
 
 namespace App\Entity;
 
+use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Table(name="contact")
- * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
- */
+#[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type:"integer")]
     protected $id;
 
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max="40")
-     * @ORM\Column(name="first_name", type="string", length=40)
-     */
+    #[Assert\NotBlank()]
+    #[Assert\Length(max: 40)]
+    #[ORM\Column(length:40)]
     protected $firstName;
 
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max="40")
-     * @ORM\Column(name="last_name", type="string", length=40)
-     */
+    #[Assert\NotBlank()]
+    #[Assert\Length(max: 40)]
+    #[ORM\Column(length:40)]
     protected $lastName;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=80, nullable=true)
-     */
+
+    #[ORM\Column(length:80, nullable: true)]
     protected $email;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=20, nullable=true)
-     */
+
+    #[ORM\Column(length:20, nullable: true)]
     protected $telephone;
 
-    /**
-     * @var Company
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Company")
-     */
+    #[ORM\ManyToOne(targetEntity: Company::class)]
     protected $company;
 
     /**
